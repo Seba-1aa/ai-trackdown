@@ -1,27 +1,37 @@
 ---
-id: EPIC-001
+epic_id: EP-0001
 type: epic
 title: Modern Authentication System
 status: in-progress
-owner: @alex-dev
-created: 2025-01-01T09:00:00Z
-updated: 2025-01-07T15:45:00Z
+assignee: @alex-dev
+created_date: 2025-01-01T09:00:00Z
+updated_date: 2025-01-07T15:45:00Z
 target_date: 2025-01-31T23:59:59Z
 labels: [authentication, security, backend, high-priority]
 token_budget: 40000
+description: Modernize ShopFlow's authentication system by migrating from legacy session-based auth to a JWT + OAuth 2.0 system. This epic includes implementing secure login flows, multi-factor authentication, session management, and integration with external identity providers.
+priority: high
+estimated_tokens: 40000
+actual_tokens: 22847
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_issues: ["ISS-0001", "ISS-0002", "ISS-0003", "ISS-0004", "ISS-0005", "ISS-0006"]
+completion_percentage: 57
+dependencies: []
+blocked_by: []
+blocks: []
 token_usage:
   total: 22847
+  remaining: 17153
   remaining: 17153
   by_agent:
     claude: 12892
     gpt4: 6247
     copilot: 3708
 sync:
-  github: 
-    milestone_id: 15
-    milestone_number: 3
-  jira: PLATFORM-100
-  linear: epic_abc123
+  github: "https://github.com/shopflow/api/milestone/15"
+  jira: "PLATFORM-100"
+  linear: "epic_abc123"
 ---
 
 # Modern Authentication System

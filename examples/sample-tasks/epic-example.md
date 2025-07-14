@@ -1,19 +1,36 @@
 ---
-id: EPIC-001
+epic_id: EP-0001
 type: epic
 title: E-commerce Product Catalog System
 status: in-progress
-owner: @product-lead
-created: 2025-01-07T09:00:00Z
+assignee: @product-lead
+created_date: 2025-01-07T09:00:00Z
+updated_date: 2025-01-07T09:00:00Z
 target_date: 2025-03-15T00:00:00Z
 token_budget: 75000
+description: Implement a comprehensive product catalog system for our e-commerce platform that supports complex product hierarchies, real-time inventory management, and AI-powered search capabilities.
+priority: high
+estimated_tokens: 75000
+actual_tokens: 18456
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: local
+related_issues: ["ISS-0001", "ISS-0002", "ISS-0003", "ISS-0004", "ISS-0005", "ISS-0006", "ISS-0007", "ISS-0008", "ISS-0009", "ISS-0010", "ISS-0011", "ISS-0012"]
+completion_percentage: 25
+dependencies: ["AUTH-EPIC-001", "INFRA-EPIC-002", "DESIGN-EPIC-001"]
+blocked_by: []
+blocks: []
 token_usage:
   total: 18456
+  remaining: 56544
   by_agent:
     claude: 12234
     gpt4: 4567
     copilot: 1655
 labels: [ecommerce, catalog, high-priority, customer-facing]
+sync:
+  github: null
+  jira: null
+  linear: null
 ---
 
 # E-commerce Product Catalog System

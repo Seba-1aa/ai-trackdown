@@ -1,27 +1,37 @@
 ---
-id: EPIC-003
+epic_id: EP-0003
 type: epic
 title: AI-Powered Product Recommendation Engine
 status: planning
-owner: @ml-team
-created: 2025-01-01T11:00:00Z
-updated: 2025-01-07T13:10:00Z
+assignee: @ml-team
+created_date: 2025-01-01T11:00:00Z
+updated_date: 2025-01-07T13:10:00Z
 target_date: 2025-03-15T23:59:59Z
 labels: [machine-learning, personalization, ai, recommendation-engine]
 token_budget: 80000
+description: Implement an intelligent product recommendation system that leverages machine learning to deliver personalized shopping experiences. The system will combine collaborative filtering, content-based filtering, and large language models to provide contextual, relevant product suggestions across the entire customer journey.
+priority: high
+estimated_tokens: 80000
+actual_tokens: 8120
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_issues: ["ISS-0015", "ISS-0016", "ISS-0017", "ISS-0018", "ISS-0019", "ISS-0020", "ISS-0021", "ISS-0022"]
+completion_percentage: 10
+dependencies: ["EP-0001", "EP-0002"]
+blocked_by: []
+blocks: []
 token_usage:
   total: 8120
+  remaining: 71880
   remaining: 71880
   by_agent:
     claude: 4892
     gpt4: 2456
     copilot: 772
 sync:
-  github: 
-    milestone_id: 17
-    milestone_number: 5
-  jira: PLATFORM-102
-  linear: epic_ghi789
+  github: "https://github.com/shopflow/ml/milestone/17"
+  jira: "PLATFORM-102"
+  linear: "epic_ghi789"
 ---
 
 # AI-Powered Product Recommendation Engine

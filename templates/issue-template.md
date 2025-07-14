@@ -1,15 +1,42 @@
 ---
-id: ISSUE-000
+# Issue Template - AI-TRACKDOWN v4.3.0
+# Detailed implementation issue template
+
+# Project Association (Optional)
+# For multi-project environments, specify the parent project
+# For single-project environments, this can be omitted or left as null
+project_id: PRJ-0001  # Optional: Remove for single-project setups
+
+issue_id: ISS-0000
 type: issue
-title: [Issue Title]
-status: open
-epic: null
-assignee: @username
-created: YYYY-MM-DDTHH:mm:ssZ
-updated: YYYY-MM-DDTHH:mm:ssZ
+epic_id: EP-0000
+title: "[Issue Title]"
+description: "Detailed description of the issue or feature request"
+state: ready_for_engineering
+status: planning                     # DEPRECATED: Use state field
+priority: medium
+assignee: "@username"
+created_date: "2025-07-09T10:00:00Z"
+updated_date: "2025-07-09T10:00:00Z"
+estimated_tokens: 500
+actual_tokens: 0
+ai_context:
+  - "context/requirements"
+  - "context/constraints"
+  - "context/assumptions"
+  - "context/dependencies"
+sync_status: local
+
+# State metadata for automation and tracking
+state_metadata:
+  transitioned_at: "2025-07-09T10:00:00Z"
+  transitioned_by: "@username"
+  previous_state: planning
+  automation_eligible: true
+  assignee_on_transition: "@engineering"
+  notifications_sent: ["@engineering"]
 labels: []
 estimate: 0
-priority: medium
 token_usage:
   total: 0
   by_agent: {}
@@ -17,9 +44,19 @@ sync:
   github: null
   jira: null
   linear: null
+related_tasks: []
+related_issues: []
+completion_percentage: 0
+dependencies: []
+blocked_by: []
+blocks: []
 ---
 
 # [Issue Title]
+
+> **Usage Mode**: This template supports both single-project and multi-project environments.
+> - **Single Project**: Remove or set `project_id: null` in the frontmatter
+> - **Multi-Project**: Specify the parent project ID (e.g., `PRJ-0001`)
 
 ## Description
 [Detailed description of the issue or feature request]

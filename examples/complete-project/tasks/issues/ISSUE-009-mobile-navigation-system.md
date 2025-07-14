@@ -1,27 +1,38 @@
 ---
-id: ISSUE-009
+issue_id: ISS-0009
 type: issue
 title: Mobile Navigation System
 status: in-review
-epic: EPIC-002
+epic_id: EP-0002
 assignee: @frontend-lead
-created: 2025-01-03T11:00:00Z
-updated: 2025-01-07T16:45:00Z
+created_date: 2025-01-03T11:00:00Z
+updated_date: 2025-01-07T16:45:00Z
 labels: [mobile, navigation, frontend, ux]
 estimate: 8
+description: Design and implement a comprehensive mobile navigation system that provides intuitive navigation across the ShopFlow mobile experience. This includes hamburger menu, bottom tab navigation, breadcrumbs, and search functionality optimized for touch interactions.
+priority: high
+estimated_tokens: 4000
+actual_tokens: 3247
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0010", "TSK-0011", "TSK-0012"]
+related_issues: ["ISS-0008", "ISS-0010"]
+completion_percentage: 95
+dependencies: ["ISS-0008"]
+blocked_by: []
+blocks: ["ISS-0010", "ISS-0011"]
 effort_spent: 9.5
 token_usage:
   total: 3247
+  remaining: 753
   by_agent:
     claude: 1892
     gpt4: 1247
     copilot: 108
 sync:
-  github: 298
-  jira: PLATFORM-156
-  linear: issue_nav456
-reviewers: [@ux-team, @mobile-specialist, @accessibility-expert]
-review_started: 2025-01-07T14:00:00Z
+  github: "https://github.com/shopflow/ui/issues/298"
+  jira: "PLATFORM-156"
+  linear: "issue_nav456"
 ---
 
 # Mobile Navigation System

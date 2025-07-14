@@ -1,29 +1,36 @@
 ---
-id: TASK-015
+task_id: TSK-0015
 type: task
 title: OAuth Token Refresh Implementation
 status: open
-issue: ISSUE-003
+issue_id: ISS-0003
 assignee: @alex-dev
-created: 2025-01-06T14:00:00Z
-updated: 2025-01-07T10:15:00Z
+created_date: 2025-01-06T14:00:00Z
+updated_date: 2025-01-07T10:15:00Z
 labels: [oauth, token-refresh, authentication, backend]
 estimate: 5
+description: Implement automatic OAuth token refresh functionality to maintain user sessions without requiring re-authentication. This includes handling refresh token rotation, error recovery, and graceful degradation when refresh tokens expire or become invalid.
+epic_id: EP-0001
+estimated_tokens: 4800
+actual_tokens: 423
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+completion_percentage: 0
+dependencies: ["TSK-0012", "TSK-0013"]
+blocked_by: ["TSK-0012"]
+blocks: []
 effort_spent: 0
 token_usage:
   total: 423
+  remaining: 4377
   by_agent:
     claude: 278
     gpt4: 145
     copilot: 0
 sync:
-  github: 678
-  jira: PLATFORM-203
-priority: high
-blocked_by: []
-dependencies: 
-  - TASK-012 # OAuth Provider Integration (90% complete)
-  - TASK-013 # Token Storage Encryption (completed)
+  github: "https://github.com/shopflow/api/issues/678"
+  jira: "PLATFORM-203"
+  linear: null
 ---
 
 # OAuth Token Refresh Implementation

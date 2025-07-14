@@ -1,27 +1,37 @@
 ---
-id: EPIC-002
+epic_id: EP-0002
 type: epic
 title: Mobile-First UI Redesign
 status: in-progress
-owner: @ui-team
-created: 2025-01-01T10:00:00Z
-updated: 2025-01-07T14:20:00Z
+assignee: @ui-team
+created_date: 2025-01-01T10:00:00Z
+updated_date: 2025-01-07T14:20:00Z
 target_date: 2025-02-28T23:59:59Z
 labels: [frontend, mobile, design-system, user-experience]
 token_budget: 60000
+description: Transform ShopFlow's desktop-centric interface into a mobile-first, responsive experience that delivers exceptional user experience across all devices. This epic focuses on building a comprehensive design system, implementing responsive components, and optimizing performance for mobile users.
+priority: high
+estimated_tokens: 60000
+actual_tokens: 18234
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_issues: ["ISS-0007", "ISS-0008", "ISS-0009", "ISS-0010", "ISS-0011", "ISS-0012", "ISS-0013", "ISS-0014"]
+completion_percentage: 30
+dependencies: ["EP-0001"]
+blocked_by: []
+blocks: []
 token_usage:
   total: 18234
+  remaining: 41766
   remaining: 41766
   by_agent:
     claude: 9456
     gpt4: 5847
     copilot: 2931
 sync:
-  github: 
-    milestone_id: 16
-    milestone_number: 4
-  jira: PLATFORM-101
-  linear: epic_def456
+  github: "https://github.com/shopflow/ui/milestone/16"
+  jira: "PLATFORM-101"
+  linear: "epic_def456"
 ---
 
 # Mobile-First UI Redesign

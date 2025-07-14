@@ -1,16 +1,28 @@
 ---
-id: EPIC-001
+epic_id: EP-0001
 type: epic
 title: User Authentication and Authorization System
 status: in-progress
-owner: @alice
-created: 2025-01-01T09:00:00Z
-updated: 2025-01-07T14:30:00Z
+assignee: @alice
+created_date: 2025-01-01T09:00:00Z
+updated_date: 2025-01-07T14:30:00Z
 target_date: 2025-02-15T23:59:59Z
 labels: [authentication, security, foundational, q1-2025]
 token_budget: 75000
+description: Create a secure, scalable authentication system that supports multiple auth methods and provides a seamless user experience for our e-commerce platform.
+priority: high
+estimated_tokens: 75000
+actual_tokens: 18547
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_issues: ["ISS-0001", "ISS-0002", "ISS-0003", "ISS-0004", "ISS-0005", "ISS-0006"]
+completion_percentage: 25
+dependencies: []
+blocked_by: []
+blocks: []
 token_usage:
   total: 18547
+  remaining: 56453
   remaining: 56453
   by_phase:
     planning: 5200
@@ -18,7 +30,7 @@ token_usage:
     testing: 0
     documentation: 0
 sync:
-  github: 1
+  github: "https://github.com/company/project/milestone/1"
   jira: null
   linear: null
 ---

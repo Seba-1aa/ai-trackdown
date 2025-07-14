@@ -1,15 +1,34 @@
 ---
-id: EPIC-002
+epic_id: EP-0002
 type: epic
 title: Project Rebranding to ai-trackdown
+description: Complete rebranding of the project from "ai-trackdown" to "trackdown-ai" to improve market positioning, memorability, and technical advantages.
 status: open
-owner: @claude-pm-assistant
-created: 2025-01-07T15:45:00Z
+assignee: @claude-pm-assistant
+created_date: 2025-01-07T15:45:00Z
+updated_date: 2025-01-07T15:45:00Z
 target_date: 2025-01-07T18:00:00Z
+priority: high
+estimated_tokens: 5000
+actual_tokens: 0
 token_budget: 5000
 token_usage:
   total: 0
   remaining: 5000
+related_issues: ["ISS-0002"]
+related_tasks: []
+completion_percentage: 0
+dependencies: []
+blocked_by: []
+blocks: []
+ai_context: |
+  This epic handles the complete rebranding from "ai-trackdown" to "trackdown-ai".
+  Focus on systematic updates across all documentation, maintaining consistency, and ensuring no broken references.
+  Priority is high as it blocks distribution activities.
+sync_status:
+  github: null
+  jira: null
+  linear: null
 ---
 
 # Project Rebranding to trackdown-ai
@@ -38,7 +57,7 @@ Complete rebranding of the project from "ai-trackdown" to "trackdown-ai" to impr
 - Professional rebranding execution
 
 ## Issues
-- [ ] ISSUE-001: Rebrand project from ai-trackdown to trackdown-ai
+- [ ] ISS-0002: Rebrand project from ai-trackdown to trackdown-ai
 
 ## Token Tracking
 | Date | Agent | Task | Tokens | Purpose |

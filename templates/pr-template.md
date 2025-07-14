@@ -1,31 +1,70 @@
 ---
-pr_id: "PR-XXX"
-title: ""
-author: ""
-reviewer: ""
-status: "draft"  # draft | ready | in-review | approved | changes-requested | merged | closed
-target_branch: ""
-source_branch: ""
+# PR Template - AI-TRACKDOWN v4.3.0
+# Pull request template for code changes
+
+# Project Association (Optional)
+# For multi-project environments, specify the parent project
+# For single-project environments, this can be omitted or left as null
+project_id: PRJ-0001  # Optional: Remove for single-project setups
+
+pr_id: "PR-0000"
+type: pr
+issue_id: ISS-0000
+epic_id: EP-0000
+title: "[PR Title]"
+description: "Technical description of code changes"
+state: ready_for_review
+status: open                         # DEPRECATED: Use state field
+priority: medium
+assignee: "@username"
+created_date: "2025-07-09T10:00:00Z"
+updated_date: "2025-07-09T10:00:00Z"
+estimated_tokens: 50
+actual_tokens: 0
+ai_context:
+  - "context/requirements"
+  - "context/constraints"
+sync_status: local
+
+# State metadata for automation and tracking
+state_metadata:
+  transitioned_at: "2025-07-09T10:00:00Z"
+  transitioned_by: "@username"
+  previous_state: open
+  automation_eligible: true
+  assignee_on_transition: "@reviewers"
+  notifications_sent: ["@reviewers"]
+labels: []
+author: "@username"
+reviewer: "@reviewer"
+target_branch: "main"
+source_branch: "feature/branch-name"
+branch_name: "feature/branch-name"
 linked_issues: []
 linked_tasks: []
-created_at: ""
-updated_at: ""
 files_changed: []
 commit_count: 0
 additions: 0
 deletions: 0
 review_requests: []
 approval_count: 0
-merge_strategy: "merge"  # merge | squash | rebase
-labels: []
+merge_strategy: "merge"
 milestone: ""
 token_usage:
-  creation: 0
-  review: 0
   total: 0
+  by_agent: {}
+sync:
+  github: null
+  jira: null
+  linear: null
+review_status: "pending"
 ---
 
 # {PR_TITLE}
+
+> **Usage Mode**: This template supports both single-project and multi-project environments.
+> - **Single Project**: Remove or set `project_id: null` in the frontmatter
+> - **Multi-Project**: Specify the parent project ID (e.g., `PRJ-0001`)
 
 ## 📝 Summary
 

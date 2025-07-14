@@ -1,26 +1,39 @@
 ---
-id: ISSUE-001
+issue_id: ISS-0001
 type: issue
 title: JWT Service Implementation
 status: done
-epic: EPIC-001
+epic_id: EP-0001
 assignee: @alex-dev
-created: 2025-01-01T14:00:00Z
-updated: 2025-01-05T16:30:00Z
+created_date: 2025-01-01T14:00:00Z
+updated_date: 2025-01-05T16:30:00Z
 completed: 2025-01-05T16:30:00Z
 labels: [authentication, backend, jwt, security]
 estimate: 8
+description: Implement a comprehensive JWT (JSON Web Token) service for stateless authentication in the ShopFlow platform. This service will handle token generation, validation, refresh, and revocation to support the new authentication architecture.
+priority: high
+estimated_tokens: 4000
+actual_tokens: 3892
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0001", "TSK-0002", "TSK-0003"]
+related_issues: ["ISS-0002", "ISS-0003"]
+completion_percentage: 100
+dependencies: []
+blocked_by: []
+blocks: ["ISS-0002", "ISS-0003"]
 actual_effort: 7.5
 token_usage:
   total: 3892
+  remaining: 108
   by_agent:
     claude: 2847
     gpt4: 892
     copilot: 153
 sync:
-  github: 234
-  jira: PLATFORM-123
-  linear: issue_xyz789
+  github: "https://github.com/shopflow/api/issues/234"
+  jira: "PLATFORM-123"
+  linear: "issue_xyz789"
 ---
 
 # JWT Service Implementation

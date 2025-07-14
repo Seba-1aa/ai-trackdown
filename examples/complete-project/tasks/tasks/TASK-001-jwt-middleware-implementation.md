@@ -1,24 +1,37 @@
 ---
-id: TASK-001
+task_id: TSK-0001
 type: task
 title: JWT Middleware Implementation
 status: done
-issue: ISSUE-001
+issue_id: ISS-0001
 assignee: @alex-dev
-created: 2025-01-02T09:30:00Z
-updated: 2025-01-02T17:45:00Z
+created_date: 2025-01-02T09:30:00Z
+updated_date: 2025-01-02T17:45:00Z
 completed: 2025-01-02T17:45:00Z
 labels: [middleware, jwt, authentication, backend]
 estimate: 3
+description: Implement Express.js middleware for JWT token validation that will protect authenticated routes in the ShopFlow API. The middleware should validate tokens, extract user context, handle errors gracefully, and integrate with the existing authentication system.
+epic_id: EP-0001
+priority: high
+estimated_tokens: 800
+actual_tokens: 672
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+completion_percentage: 100
+dependencies: []
+blocked_by: []
+blocks: []
 actual_effort: 2.5
 token_usage:
   total: 672
+  remaining: 128
   by_agent:
     claude: 456
     copilot: 216
 sync:
-  github: 445
-  jira: PLATFORM-134
+  github: "https://github.com/shopflow/api/issues/445"
+  jira: "PLATFORM-134"
+  linear: null
 ---
 
 # JWT Middleware Implementation

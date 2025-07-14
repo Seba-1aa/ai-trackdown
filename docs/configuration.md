@@ -23,7 +23,7 @@ project:
 
 This minimal configuration sets up AI-Trackdown with:
 - Project name for identification
-- ID prefix for generated task IDs (PROJ-EPIC-001, PROJ-ISSUE-001, etc.)
+- ID prefix for generated task IDs (PROJ-EP-0001, PROJ-ISS-0001, etc.)
 - Default token budget for epics
 
 ### Standard Configuration

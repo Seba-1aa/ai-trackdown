@@ -29,6 +29,8 @@ AI Track Down isn't just another task manager - it's the missing documentation f
 
 ## 🚀 Key Features
 
+- **Multi-Project Management**: Support for both single-project and multi-project workflows with PRJ-XXXX identifiers
+- **Hierarchical Structure**: Projects → Epics → Issues → Tasks → Pull Requests with full relationship tracking
 - **Pure Markdown Templates**: All templates and examples use human-readable markdown with GitHub Flavored Markdown (GFM)
 - **Native llms.txt Support**: Templates for generating llms.txt files for AI discoverability and context
 - **Git-Native Structure**: File organization leverages git's distributed nature with state management patterns
@@ -36,6 +38,30 @@ AI Track Down isn't just another task manager - it's the missing documentation f
 - **Integration Patterns**: Documentation patterns for GitHub Issues, Jira, and Linear integration
 - **Zero Dependencies**: Template system works offline with no external dependencies
 - **AI-Optimized**: Structured for minimal token consumption and maximum AI efficiency
+- **Team Coordination**: Project-level team member management and cross-project dependency tracking
+
+## 📋 Ticketing Schema
+
+**IMPORTANT**: AI-Trackdown uses a structured ticketing schema to ensure consistency and reliability across all project management activities.
+
+### Schema Documentation
+
+- **[SCHEMA.md](SCHEMA.md)** - Complete ticketing schema specification with field definitions, data types, and validation rules
+- **[AI-TRACKDOWN.json](AI-TRACKDOWN.json)** - JSON Schema file for programmatic validation and tooling integration
+
+### Key Schema Features
+
+- **Hierarchical Structure**: Projects → Epics → Issues → Tasks → Pull Requests
+- **Multi-Project Support**: Optional `project_id` field for cross-project management
+- **Standardized Field Names**: `project_id`, `epic_id`, `issue_id`, `task_id`, `assignee`, `created_date`, `updated_date`
+- **Modern ID Formats**: `PRJ-0001`, `EP-0001`, `ISS-0001`, `TSK-0001`, `PR-0001`
+- **Required Fields**: All tickets must include `description`, `estimated_tokens`, `actual_tokens`, `ai_context`, `sync_status`
+- **Validation Ready**: Schema v4.3.0 with comprehensive validation rules including project support
+- **Git Integration**: Built-in git repository metadata for project-level coordination
+
+### Schema Compliance
+
+All templates, examples, and documentation in this project follow the schema specification. When creating new tickets or customizing templates, ensure compliance with the schema requirements defined in [SCHEMA.md](SCHEMA.md).
 
 ## 📦 Getting Started
 
@@ -46,13 +72,33 @@ git clone https://github.com/ai-trackdown/ai-trackdown.git
 cd ai-trackdown
 ```
 
-### Copy Templates to Your Project
+### Choose Your Usage Mode
 
+**Single-Project Mode** (recommended for individual projects):
 ```bash
-# Copy the template structure to your project
-cp -r templates/ your-project/
+# Copy the single-project template structure
+cp -r templates/single-project/ your-project/
 cd your-project
 ```
+
+**Multi-Project Mode** (recommended for organizations):
+```bash
+# Copy the multi-project template structure
+cp -r templates/multi-project/ your-organization/
+cd your-organization
+```
+
+### Project Setup
+
+**For Single-Project Mode**:
+- Project information stored in `.ai-trackdown/config.yaml`
+- All tickets implicitly belong to the project
+- Focus on epic/issue/task organization
+
+**For Multi-Project Mode**:
+- Each project gets a PRJ-XXXX identifier
+- Project-specific metadata includes git repos and team members
+- Cross-project dependencies and coordination
 
 ### Framework Structure
 
@@ -84,64 +130,77 @@ This framework is optimized for AI-human collaboration with built-in token track
 
 ## 🏁 Quick Start
 
-### 1. Set Up Your Project Structure
+### 1. Choose Your Setup Mode
 
-Copy the template directory structure to your project:
-
+**Single-Project Setup**:
 ```bash
-# Copy templates from the framework
-cp -r templates/basic-setup/ your-project/
+# Copy single-project templates
+cp -r templates/single-project/ your-project/
 cd your-project
 ```
 
-This creates the basic directory structure:
-```
-your-project/
-├── .ai-trackdown/
-│   ├── config.yaml
-│   └── llms.txt
-├── tasks/
-│   ├── epics/
-│   ├── issues/
-│   └── tasks/
-└── AI-TRACKDOWN.md
+**Multi-Project Setup**:
+```bash
+# Copy multi-project templates
+cp -r templates/multi-project/ your-organization/
+cd your-organization
 ```
 
-### 2. Create Your First Epic
+### 2. Configure Your Environment
 
-Copy and customize the epic template:
+**Single-Project Mode**:
+```bash
+# Edit project configuration
+vim .ai-trackdown/config.yaml
+# Set project name, git repository, team members
+```
 
+**Multi-Project Mode**:
+```bash
+# Create your first project
+cp templates/project-template.md projects/PRJ-0001-my-project.md
+# Edit with project details, git repo, team info
+```
+
+### 3. Create Your First Epic
+
+**Single-Project Mode**:
 ```bash
 # Use the epic template
-cp templates/task-templates/epic-template.md tasks/epics/EPIC-001-user-authentication.md
+cp templates/epic-template.md tasks/epics/EP-0001-user-authentication.md
 # Edit with your epic details
 ```
 
-### 3. Add Issues to the Epic
+**Multi-Project Mode**:
+```bash
+# Use the epic template with project reference
+cp templates/epic-template.md epics/EP-0001-user-authentication.md
+# Edit with your epic details and add project_id: PRJ-0001
+```
 
-Copy and customize issue templates:
+### 4. Add Issues to the Epic
 
 ```bash
 # Use the issue template
-cp templates/task-templates/issue-template.md tasks/issues/ISSUE-001-login-flow.md
-# Edit with your issue details and link to EPIC-001
+cp templates/issue-template.md issues/ISS-0001-login-flow.md
+# Edit with your issue details and link to EP-0001
+# Add project_id: PRJ-0001 if using multi-project mode
 ```
 
-### 4. Break Down Issues into Tasks
-
-Copy and customize task templates:
+### 5. Break Down Issues into Tasks
 
 ```bash
 # Use the task template
-cp templates/task-templates/task-template.md tasks/tasks/TASK-001-login-form.md
-# Edit with your task details and link to ISSUE-001
+cp templates/task-template.md tasks/TSK-0001-login-form.md
+# Edit with your task details and link to ISS-0001
+# Add project_id: PRJ-0001 if using multi-project mode
 ```
 
-### 5. Track AI Token Usage
+### 6. Track AI Token Usage
 
 Follow the token tracking patterns in the templates to manually log AI usage.
 
-### 6. Generate llms.txt for AI Context
+### 7. Generate llms.txt for AI Context
 
 Use the llms.txt template and customize for your project structure.
 
@@ -177,16 +236,37 @@ See [Configuration Guide](docs/configuration.md) for complete template options i
 
 Follow these manual workflows using the provided templates:
 
+**Single-Project Workflow**:
 ```bash
 # Project Setup
-cp -r templates/basic-setup/ your-project/           # Copy project structure
+cp -r templates/single-project/ your-project/       # Copy project structure
 vim your-project/.ai-trackdown/config.yaml          # Customize configuration
 
 # Creating Items
-cp templates/task-templates/epic-template.md tasks/epics/EPIC-XXX.md    # Create epic
-cp templates/task-templates/issue-template.md tasks/issues/ISSUE-XXX.md # Create issue  
-cp templates/task-templates/task-template.md tasks/tasks/TASK-XXX.md    # Create task
+cp templates/epic-template.md tasks/epics/EP-XXXX.md    # Create epic
+cp templates/issue-template.md tasks/issues/ISS-XXXX.md # Create issue  
+cp templates/task-template.md tasks/tasks/TSK-XXXX.md    # Create task
+cp templates/pr-template.md tasks/prs/PR-XXXX.md        # Create pull request
+```
 
+**Multi-Project Workflow**:
+```bash
+# Organization Setup
+cp -r templates/multi-project/ your-organization/   # Copy organization structure
+vim your-organization/.ai-trackdown/config.yaml     # Customize configuration
+
+# Creating Projects
+cp templates/project-template.md projects/PRJ-XXXX.md   # Create project
+
+# Creating Items (with project_id references)
+cp templates/epic-template.md epics/EP-XXXX.md          # Create epic
+cp templates/issue-template.md issues/ISS-XXXX.md       # Create issue  
+cp templates/task-template.md tasks/TSK-XXXX.md         # Create task
+cp templates/pr-template.md prs/PR-XXXX.md              # Create pull request
+```
+
+**Common Operations**:
+```bash
 # Managing Status
 # Edit YAML frontmatter in task files to update status
 # Use examples/status-workflows/ for common patterns
@@ -204,14 +284,13 @@ cp templates/task-templates/task-template.md tasks/tasks/TASK-XXX.md    # Create
 # Follow examples/ai-integration/ for optimization patterns
 ```
 
-### File Structure
+### Directory Structure
 
-The framework provides this simple, intuitive template structure:
-
+**Single-Project Mode**:
 ```
 project-root/
 ├── .ai-trackdown/
-│   ├── config.yaml              # Configuration template
+│   ├── config.yaml              # Project configuration
 │   ├── sync/                    # Sync pattern templates
 │   │   ├── github.json
 │   │   ├── jira.json
@@ -219,43 +298,114 @@ project-root/
 │   └── llms.txt                 # AI context template
 ├── tasks/
 │   ├── epics/
-│   │   ├── EPIC-001-user-authentication.md
-│   │   └── EPIC-002-payment-integration.md
+│   │   ├── EP-0001-user-authentication.md
+│   │   └── EP-0002-payment-integration.md
 │   ├── issues/
-│   │   ├── ISSUE-001-login-flow.md
-│   │   └── ISSUE-002-password-reset.md
-│   └── tasks/
-│       ├── TASK-001-create-login-form.md
-│       └── TASK-002-implement-oauth.md
+│   │   ├── ISS-0001-login-flow.md
+│   │   └── ISS-0002-password-reset.md
+│   ├── tasks/
+│   │   ├── TSK-0001-create-login-form.md
+│   │   └── TSK-0002-implement-oauth.md
+│   └── prs/
+│       ├── PR-0001-add-auth-middleware.md
+│       └── PR-0002-update-login-form.md
 ├── docs/
 │   └── llms-full.txt            # Complete task context template
 └── AI-TRACKDOWN.md                 # Project task overview template
 ```
 
+**Multi-Project Mode**:
+```
+organization-root/
+├── .ai-trackdown/
+│   ├── config.yaml              # Organization configuration
+│   ├── sync/                    # Sync pattern templates
+│   │   ├── github.json
+│   │   ├── jira.json
+│   │   └── linear.json
+│   └── llms.txt                 # AI context template
+├── projects/
+│   ├── PRJ-0001-web-app.md
+│   ├── PRJ-0002-mobile-app.md
+│   └── PRJ-0003-api-service.md
+├── epics/
+│   ├── EP-0001-user-authentication.md    # project_id: PRJ-0001
+│   └── EP-0002-payment-integration.md    # project_id: PRJ-0001
+├── issues/
+│   ├── ISS-0001-login-flow.md           # project_id: PRJ-0001
+│   └── ISS-0002-mobile-auth.md          # project_id: PRJ-0002
+├── tasks/
+│   ├── TSK-0001-create-login-form.md    # project_id: PRJ-0001
+│   └── TSK-0002-implement-oauth.md      # project_id: PRJ-0001
+├── prs/
+│   ├── PR-0001-add-auth-middleware.md   # project_id: PRJ-0001
+│   └── PR-0002-mobile-login.md          # project_id: PRJ-0002
+├── docs/
+│   └── llms-full.txt            # Complete organization context
+└── AI-TRACKDOWN.md                 # Organization overview template
+```
+
 ### Task File Format
 
-Each task template follows a structured markdown format:
+Each task template follows the structured markdown format defined in [SCHEMA.md](SCHEMA.md). All templates comply with the AI-TRACKDOWN.json schema specification:
 
+**Single-Project Mode Example**:
 ```markdown
 ---
-id: ISSUE-001
+issue_id: ISS-0001
 type: issue
+epic_id: EP-0001
 title: Implement user login flow
+description: "Create a secure login flow with email/password authentication and OAuth2 support"
 status: in-progress
-epic: EPIC-001
-assignee: @johndoe
-created: 2025-01-07T10:00:00Z
-updated: 2025-01-07T14:30:00Z
+priority: high
+assignee: johndoe
+created_date: 2025-01-07T10:00:00Z
+updated_date: 2025-01-07T14:30:00Z
+estimated_tokens: 1500
+actual_tokens: 1247
+ai_context:
+  - context/requirements
+  - context/constraints
+  - context/assumptions
+sync_status: synced
 labels: [authentication, frontend, priority-high]
-estimate: 5
-token_usage:
-  total: 1247
-  by_agent:
-    claude: 892
-    copilot: 355
-sync:
-  github: 145
-  jira: AUTH-234
+related_tasks: []
+related_issues: []
+completion_percentage: 60
+blocked_by: []
+blocks: []
+---
+```
+
+**Multi-Project Mode Example**:
+```markdown
+---
+project_id: PRJ-0001
+issue_id: ISS-0001
+type: issue
+epic_id: EP-0001
+title: Implement user login flow
+description: "Create a secure login flow with email/password authentication and OAuth2 support"
+status: in-progress
+priority: high
+assignee: johndoe
+created_date: 2025-01-07T10:00:00Z
+updated_date: 2025-01-07T14:30:00Z
+estimated_tokens: 1500
+actual_tokens: 1247
+ai_context:
+  - context/requirements
+  - context/constraints
+  - context/assumptions
+sync_status: synced
+labels: [authentication, frontend, priority-high]
+related_tasks: []
+related_issues: []
+related_projects: [PRJ-0002]  # Cross-project dependency
+completion_percentage: 60
+blocked_by: []
+blocks: []
 ---
 
 # Implement user login flow
@@ -287,6 +437,66 @@ Dependencies: Redis for session storage, JWT library
 - Blocked by: ISSUE-002
 - Related: ISSUE-005
 ```
+
+## 🏢 Project Management
+
+### When to Use Single vs Multi-Project Mode
+
+**Single-Project Mode** - Choose when:
+- Working on a single repository or application
+- Small team (1-5 developers)
+- Focused development scope
+- Simple organizational structure
+- Want minimal overhead and maximum simplicity
+
+**Multi-Project Mode** - Choose when:
+- Managing multiple repositories or applications
+- Large team or multiple teams
+- Complex organizational structure
+- Need cross-project dependency tracking
+- Enterprise environment with multiple stakeholders
+- Want centralized project portfolio management
+
+### Project Management Workflows
+
+**Single-Project Setup**:
+1. Initialize project with configuration in `.ai-trackdown/config.yaml`
+2. Define project metadata (name, git repo, team members)
+3. Create epics, issues, and tasks without project_id references
+4. Leverage git integration for repository coordination
+5. Use project-level token budgeting and tracking
+
+**Multi-Project Setup**:
+1. Create organization structure with central configuration
+2. Define each project with PRJ-XXXX identifiers
+3. Include project_id in all epics, issues, tasks, and PRs
+4. Track cross-project dependencies and relationships
+5. Coordinate multiple git repositories and teams
+6. Use project-level resource allocation and planning
+
+### Git Integration Benefits
+
+- **Repository Coordination**: Direct git repository links in project metadata
+- **Branch Management**: Pull request templates with branch tracking
+- **Team Integration**: Git-based team member identification
+- **Deployment Tracking**: Production and staging environment links
+- **Documentation Links**: Automatic documentation URL references
+
+### Cross-Project Dependencies
+
+In multi-project mode, you can track:
+- **Related Projects**: `related_projects` field for project relationships
+- **Cross-Project Blocking**: Dependencies between projects using `blocked_by` and `blocks`
+- **Resource Sharing**: Team members working across multiple projects
+- **Technology Alignment**: Framework and technology stack coordination
+
+### Team Coordination Features
+
+- **Project Ownership**: Clear assignee and team member definitions
+- **Role Management**: Team member roles and responsibilities
+- **Communication**: Integration with GitHub, Jira, and Linear for notifications
+- **Progress Tracking**: Project-level completion percentages and milestones
+- **Token Budgeting**: AI usage tracking and budget allocation per project
 
 ## 🤖 AI Integration
 
@@ -399,9 +609,52 @@ cd ai-trackdown
 
 ### 💡 Examples and Templates
 - **[Basic Setup Example](examples/basic-setup/)** - Small team starter template configuration
+- **[Multi-Project Setup](examples/multi-project-setup/)** - Organization-wide project management configuration
 - **[Enterprise Integration](examples/enterprise-integration/)** - Large organization template setup with multi-team coordination
 - **[Sample Tasks](examples/sample-tasks/)** - Real-world epic, issue, and task template examples
+- **[Project Templates](examples/project-templates/)** - Ready-to-use project configuration templates
 - **[Configuration Templates](examples/configs/)** - Ready-to-use config file templates for different scenarios
+
+### 🏢 Multi-Project Examples
+
+**Scenario 1: Software Company Portfolio**
+```yaml
+# PRJ-0001: Main Web Application
+name: "Customer Portal"
+git_origin: "https://github.com/company/customer-portal.git"
+team_members: ["@frontend-team", "@backend-team"]
+languages: ["typescript", "react", "node.js"]
+
+# PRJ-0002: Mobile Application  
+name: "Mobile App"
+git_origin: "https://github.com/company/mobile-app.git"
+team_members: ["@mobile-team"]
+languages: ["swift", "kotlin", "react-native"]
+
+# PRJ-0003: API Gateway
+name: "API Gateway"
+git_origin: "https://github.com/company/api-gateway.git"
+team_members: ["@backend-team", "@devops-team"]
+languages: ["python", "golang", "docker"]
+```
+
+**Scenario 2: Cross-Project Dependencies**
+```yaml
+# Epic in PRJ-0001 depends on API changes in PRJ-0003
+epic_id: EP-0001
+project_id: PRJ-0001
+title: "User Authentication Frontend"
+blocked_by: ["ISS-0025"]  # API endpoint in PRJ-0003
+related_projects: ["PRJ-0003"]
+```
+
+**Scenario 3: Shared Resources**
+```yaml
+# Team member working across multiple projects
+team_members: ["@fullstack-dev"]  # In PRJ-0001
+team_members: ["@fullstack-dev"]  # In PRJ-0002
+team_members: ["@fullstack-dev"]  # In PRJ-0003
+```
 
 ## 🤝 Contributing
 
@@ -439,7 +692,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - [ ] CLI implementation (separate project)
 - [ ] Web UI templates (optional)
 - [ ] Analytics template patterns
-- [ ] Multi-project template structures
+- [x] Multi-project template structures
 
 ## 📄 License
 

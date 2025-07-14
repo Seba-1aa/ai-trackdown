@@ -1,36 +1,38 @@
 ---
-id: ISSUE-004
+issue_id: ISS-0004
 type: issue
 title: Two-Factor Authentication Implementation
 status: blocked
-epic: EPIC-001
+epic_id: EP-0001
 assignee: @security-team
-created: 2025-01-02T15:00:00Z
-updated: 2025-01-07T09:30:00Z
+created_date: 2025-01-02T15:00:00Z
+updated_date: 2025-01-07T09:30:00Z
 labels: [authentication, security, 2fa, compliance]
 estimate: 21
+description: Implement comprehensive two-factor authentication (2FA) for the ShopFlow platform to enhance account security and meet SOC 2 Type II compliance requirements. This includes TOTP (Time-based One-Time Password), SMS verification, and backup codes with user-friendly setup and recovery flows.
+priority: critical
+estimated_tokens: 10000
+actual_tokens: 1247
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0007", "TSK-0008", "TSK-0009"]
+related_issues: ["ISS-0003", "ISS-0005"]
+completion_percentage: 15
+dependencies: ["ISS-0001", "ISS-0003"]
+blocked_by: ["EXT-0001", "EXT-0002"]
+blocks: []
 effort_spent: 3.5
 token_usage:
   total: 1247
+  remaining: 8753
   by_agent:
     claude: 892
     gpt4: 355
     copilot: 0
 sync:
-  github: 289
-  jira: PLATFORM-167
-  linear: issue_2fa890
-blocked_by: 
-  - type: external_dependency
-    description: "Security audit approval pending"
-    blocker: "Corporate security team audit"
-    created: 2025-01-05T14:00:00Z
-    expected_resolution: 2025-01-12T17:00:00Z
-  - type: compliance_review
-    description: "SOC 2 compliance validation required"
-    blocker: "Legal/compliance team review"
-    created: 2025-01-06T10:00:00Z
-    expected_resolution: 2025-01-15T17:00:00Z
+  github: "https://github.com/shopflow/api/issues/289"
+  jira: "PLATFORM-167"
+  linear: "issue_2fa890"
 ---
 
 # Two-Factor Authentication Implementation

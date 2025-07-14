@@ -1,0 +1,781 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-trackdown.com/schemas/ticket.json",
+  "title": "AI-TRACKDOWN Ticket Schema",
+  "description": "JSON Schema for AI-TRACKDOWN hierarchical ticket management system",
+  "version": "4.3.0",
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/project"
+    },
+    {
+      "$ref": "#/$defs/epic"
+    },
+    {
+      "$ref": "#/$defs/issue"
+    },
+    {
+      "$ref": "#/$defs/task"
+    },
+    {
+      "$ref": "#/$defs/pr"
+    }
+  ],
+  "$defs": {
+    "commonFields": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Human-readable title for the ticket"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Detailed description of the ticket"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["planning", "active", "blocked", "done", "draft", "open", "review", "approved", "merged", "archived", "maintenance", "deprecated"],
+          "description": "Current workflow state"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low"],
+          "description": "Priority level"
+        },
+        "assignee": {
+          "type": "string",
+          "pattern": "^@?[a-zA-Z0-9_-]+$",
+          "description": "Primary responsible party"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when ticket was created"
+        },
+        "updated_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when ticket was last modified"
+        },
+        "estimated_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Estimated AI tokens required for completion"
+        },
+        "actual_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Actual AI tokens consumed"
+        },
+        "ai_context": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "context/requirements",
+              "context/constraints",
+              "context/assumptions",
+              "context/dependencies"
+            ]
+          },
+          "description": "AI context categories"
+        },
+        "sync_status": {
+          "type": "string",
+          "enum": ["local", "synced", "conflict"],
+          "description": "External synchronization state"
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^PRJ-[0-9]{4}$",
+          "description": "Optional project identifier (PRJ-XXXX)"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "description": "Tags for categorization"
+        },
+        "token_usage": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "by_agent": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "required": ["total", "by_agent"]
+        },
+        "sync": {
+          "type": "object",
+          "properties": {
+            "github": {
+              "type": ["string", "null"],
+              "description": "GitHub issue/PR URL"
+            },
+            "jira": {
+              "type": ["string", "null"],
+              "description": "JIRA ticket URL"
+            },
+            "linear": {
+              "type": ["string", "null"],
+              "description": "Linear issue URL"
+            }
+          }
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "status",
+        "priority",
+        "assignee",
+        "created_date",
+        "updated_date",
+        "estimated_tokens",
+        "actual_tokens",
+        "ai_context",
+        "sync_status"
+      ]
+    },
+    "relationshipFields": {
+      "type": "object",
+      "properties": {
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(PRJ|EP|ISS|TSK|PR)-[0-9]{4}$"
+          },
+          "description": "Dependency identifiers"
+        },
+        "blocked_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(PRJ|EP|ISS|TSK|PR)-[0-9]{4}$"
+          },
+          "description": "Blocking item identifiers"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(PRJ|EP|ISS|TSK|PR)-[0-9]{4}$"
+          },
+          "description": "Dependent item identifiers"
+        },
+        "related_projects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^PRJ-[0-9]{4}$"
+          },
+          "description": "Related project identifiers"
+        },
+        "completion_percentage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Progress percentage"
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/commonFields"
+        },
+        {
+          "$ref": "#/$defs/relationshipFields"
+        }
+      ],
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "pattern": "^PRJ-[0-9]{4}$",
+          "description": "Project identifier (PRJ-XXXX)"
+        },
+        "type": {
+          "type": "string",
+          "const": "project"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Project display name"
+        },
+        "git_origin": {
+          "type": "string",
+          "format": "uri",
+          "description": "Git repository URL"
+        },
+        "git_branch": {
+          "type": "string",
+          "description": "Default branch name"
+        },
+        "repository_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Git repository URL"
+        },
+        "clone_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Git clone URL"
+        },
+        "default_branch": {
+          "type": "string",
+          "description": "Default git branch"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Programming languages used"
+        },
+        "framework": {
+          "type": "string",
+          "description": "Framework or technology stack"
+        },
+        "deployment_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Production deployment URL"
+        },
+        "documentation_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation URL"
+        },
+        "team_members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^@?[a-zA-Z0-9_-]+$"
+          },
+          "description": "Team members"
+        },
+        "license": {
+          "type": "string",
+          "description": "Project license"
+        }
+      },
+      "required": [
+        "project_id",
+        "type",
+        "name",
+        "git_origin",
+        "git_branch"
+      ],
+      "additionalProperties": false
+    },
+    "epic": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/commonFields"
+        },
+        {
+          "$ref": "#/$defs/relationshipFields"
+        }
+      ],
+      "properties": {
+        "epic_id": {
+          "type": "string",
+          "pattern": "^EP-[0-9]{4}$",
+          "description": "Epic identifier (EP-XXXX)"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^EPIC-[0-9]{3}$",
+          "description": "Legacy epic identifier format"
+        },
+        "type": {
+          "type": "string",
+          "const": "epic"
+        },
+        "owner": {
+          "type": "string",
+          "pattern": "^@?[a-zA-Z0-9_-]+$",
+          "description": "Epic owner (legacy field)"
+        },
+        "target_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Target completion date"
+        },
+        "token_budget": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total token budget for the epic"
+        },
+        "related_issues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ISS-[0-9]{4}$"
+          },
+          "description": "Related issue identifiers"
+        }
+      },
+      "required": [
+        "epic_id",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "issue": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/commonFields"
+        },
+        {
+          "$ref": "#/$defs/relationshipFields"
+        }
+      ],
+      "properties": {
+        "issue_id": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{4}$",
+          "description": "Issue identifier (ISS-XXXX)"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^ISSUE-[0-9]{3}$",
+          "description": "Legacy issue identifier format"
+        },
+        "type": {
+          "type": "string",
+          "const": "issue"
+        },
+        "epic_id": {
+          "type": "string",
+          "pattern": "^EP-[0-9]{4}$",
+          "description": "Parent epic identifier"
+        },
+        "epic": {
+          "type": ["string", "null"],
+          "pattern": "^EP-[0-9]{4}$",
+          "description": "Parent epic identifier (legacy field)"
+        },
+        "estimate": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Story point estimate"
+        },
+        "related_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^TSK-[0-9]{4}$"
+          },
+          "description": "Related task identifiers"
+        },
+        "related_issues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ISS-[0-9]{4}$"
+          },
+          "description": "Related issue identifiers"
+        }
+      },
+      "required": [
+        "issue_id",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "task": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/commonFields"
+        },
+        {
+          "$ref": "#/$defs/relationshipFields"
+        }
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "pattern": "^TSK-[0-9]{4}$",
+          "description": "Task identifier (TSK-XXXX)"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^TASK-[0-9]{3}$",
+          "description": "Legacy task identifier format"
+        },
+        "type": {
+          "type": "string",
+          "const": "task"
+        },
+        "issue_id": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{4}$",
+          "description": "Parent issue identifier"
+        },
+        "epic_id": {
+          "type": "string",
+          "pattern": "^EP-[0-9]{4}$",
+          "description": "Root epic identifier"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(EP|ISS)-[0-9]{4}$"
+          },
+          "description": "Parent identifiers (legacy field)"
+        },
+        "estimate": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Time estimate in hours"
+        },
+        "subtasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^TSK-[0-9]{4}$"
+          },
+          "description": "Sub-task identifiers"
+        }
+      },
+      "required": [
+        "task_id",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "pr": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/commonFields"
+        }
+      ],
+      "properties": {
+        "pr_id": {
+          "type": "string",
+          "pattern": "^PR-[0-9]{4}$",
+          "description": "Pull request identifier (PR-XXXX)"
+        },
+        "type": {
+          "type": "string",
+          "const": "pr"
+        },
+        "issue_id": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{4}$",
+          "description": "Parent issue identifier"
+        },
+        "epic_id": {
+          "type": "string",
+          "pattern": "^EP-[0-9]{4}$",
+          "description": "Root epic identifier"
+        },
+        "author": {
+          "type": "string",
+          "pattern": "^@?[a-zA-Z0-9_-]+$",
+          "description": "PR author"
+        },
+        "reviewer": {
+          "type": "string",
+          "pattern": "^@?[a-zA-Z0-9_-]+$",
+          "description": "PR reviewer"
+        },
+        "target_branch": {
+          "type": "string",
+          "description": "Target branch for merge"
+        },
+        "source_branch": {
+          "type": "string",
+          "description": "Source branch with changes"
+        },
+        "branch_name": {
+          "type": "string",
+          "description": "Git branch reference"
+        },
+        "linked_issues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ISS-[0-9]{4}$"
+          },
+          "description": "Linked issue identifiers"
+        },
+        "linked_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^TSK-[0-9]{4}$"
+          },
+          "description": "Linked task identifiers"
+        },
+        "files_changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of modified files"
+        },
+        "commit_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of commits"
+        },
+        "additions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Lines added"
+        },
+        "deletions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Lines deleted"
+        },
+        "review_requests": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^@?[a-zA-Z0-9_-]+$"
+          },
+          "description": "Requested reviewers"
+        },
+        "approval_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of approvals"
+        },
+        "merge_strategy": {
+          "type": "string",
+          "enum": ["merge", "squash", "rebase"],
+          "description": "Merge strategy"
+        },
+        "milestone": {
+          "type": "string",
+          "description": "Associated milestone"
+        },
+        "review_status": {
+          "type": "string",
+          "enum": ["pending", "approved", "changes-requested", "commented"],
+          "description": "Code review state"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "PR creation timestamp"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "PR last update timestamp"
+        }
+      },
+      "required": [
+        "pr_id",
+        "type"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "project_id": "PRJ-0001",
+      "type": "project",
+      "name": "AI-TRACKDOWN",
+      "title": "AI-TRACKDOWN Project Management System",
+      "description": "Hierarchical ticket management system for AI-driven development workflows",
+      "status": "active",
+      "priority": "high",
+      "assignee": "@maintainer",
+      "created_date": "2025-07-09T10:00:00Z",
+      "updated_date": "2025-07-09T10:00:00Z",
+      "estimated_tokens": 10000,
+      "actual_tokens": 2500,
+      "ai_context": ["context/requirements", "context/dependencies"],
+      "sync_status": "synced",
+      "git_origin": "https://github.com/user/ai-trackdown.git",
+      "git_branch": "main",
+      "labels": ["project-management", "ai-tools", "productivity"],
+      "token_usage": {
+        "total": 2500,
+        "by_agent": {
+          "documentation": 1000,
+          "development": 1500
+        }
+      },
+      "sync": {
+        "github": "https://github.com/user/ai-trackdown",
+        "jira": null,
+        "linear": null
+      },
+      "repository_url": "https://github.com/user/ai-trackdown.git",
+      "clone_url": "git@github.com:user/ai-trackdown.git",
+      "default_branch": "main",
+      "languages": ["javascript", "json", "markdown"],
+      "framework": "Node.js CLI",
+      "deployment_url": "https://npmjs.com/package/ai-trackdown",
+      "documentation_url": "https://ai-trackdown.com/docs",
+      "team_members": ["@maintainer", "@contributor1", "@contributor2"],
+      "license": "MIT",
+      "completion_percentage": 75
+    },
+    {
+      "project_id": "PRJ-0001",
+      "epic_id": "EP-0001",
+      "type": "epic",
+      "title": "User Authentication System",
+      "description": "Comprehensive user authentication and authorization system",
+      "status": "planning",
+      "priority": "high",
+      "assignee": "@teamlead",
+      "created_date": "2025-07-09T10:00:00Z",
+      "updated_date": "2025-07-09T10:00:00Z",
+      "estimated_tokens": 1000,
+      "actual_tokens": 0,
+      "ai_context": ["context/requirements", "context/constraints"],
+      "sync_status": "local",
+      "labels": ["security", "authentication"],
+      "token_usage": {
+        "total": 0,
+        "by_agent": {}
+      },
+      "sync": {
+        "github": null,
+        "jira": null,
+        "linear": null
+      },
+      "target_date": "2025-08-01T00:00:00Z",
+      "token_budget": 50000,
+      "related_issues": ["ISS-0001", "ISS-0002"],
+      "completion_percentage": 0
+    },
+    {
+      "project_id": "PRJ-0001",
+      "issue_id": "ISS-0001",
+      "type": "issue",
+      "epic_id": "EP-0001",
+      "title": "JWT Token Service Implementation",
+      "description": "Implement JWT token generation and validation service",
+      "status": "planning",
+      "priority": "high",
+      "assignee": "@developer",
+      "created_date": "2025-07-09T10:00:00Z",
+      "updated_date": "2025-07-09T10:00:00Z",
+      "estimated_tokens": 500,
+      "actual_tokens": 0,
+      "ai_context": ["context/requirements", "context/dependencies"],
+      "sync_status": "local",
+      "labels": ["jwt", "service"],
+      "token_usage": {
+        "total": 0,
+        "by_agent": {}
+      },
+      "sync": {
+        "github": null,
+        "jira": null,
+        "linear": null
+      },
+      "estimate": 8,
+      "related_tasks": ["TSK-0001"],
+      "completion_percentage": 0
+    },
+    {
+      "project_id": "PRJ-0001",
+      "task_id": "TSK-0001",
+      "type": "task",
+      "issue_id": "ISS-0001",
+      "epic_id": "EP-0001",
+      "title": "Create JWT middleware implementation",
+      "description": "Implement Express middleware for JWT token validation",
+      "status": "planning",
+      "priority": "medium",
+      "assignee": "@developer",
+      "created_date": "2025-07-09T10:00:00Z",
+      "updated_date": "2025-07-09T10:00:00Z",
+      "estimated_tokens": 100,
+      "actual_tokens": 0,
+      "ai_context": ["context/requirements"],
+      "sync_status": "local",
+      "labels": ["middleware", "jwt"],
+      "token_usage": {
+        "total": 0,
+        "by_agent": {}
+      },
+      "sync": {
+        "github": null,
+        "jira": null,
+        "linear": null
+      },
+      "estimate": 4,
+      "completion_percentage": 0
+    },
+    {
+      "project_id": "PRJ-0001",
+      "pr_id": "PR-0001",
+      "type": "pr",
+      "issue_id": "ISS-0001",
+      "epic_id": "EP-0001",
+      "title": "Add JWT middleware implementation",
+      "description": "Implements JWT token validation middleware for authentication",
+      "status": "draft",
+      "priority": "medium",
+      "assignee": "@developer",
+      "created_date": "2025-07-09T10:00:00Z",
+      "updated_date": "2025-07-09T10:00:00Z",
+      "estimated_tokens": 50,
+      "actual_tokens": 0,
+      "ai_context": ["context/requirements"],
+      "sync_status": "local",
+      "labels": ["middleware"],
+      "token_usage": {
+        "total": 0,
+        "by_agent": {}
+      },
+      "sync": {
+        "github": null,
+        "jira": null,
+        "linear": null
+      },
+      "author": "@developer",
+      "reviewer": "@teamlead",
+      "target_branch": "main",
+      "source_branch": "feature/jwt-middleware",
+      "branch_name": "feature/jwt-middleware",
+      "linked_issues": ["ISS-0001"],
+      "linked_tasks": ["TSK-0001"],
+      "files_changed": ["src/middleware/jwt.js", "tests/middleware/jwt.test.js"],
+      "commit_count": 3,
+      "additions": 150,
+      "deletions": 10,
+      "review_requests": ["@teamlead"],
+      "approval_count": 0,
+      "merge_strategy": "squash",
+      "milestone": "v1.0.0",
+      "review_status": "pending"
+    }
+  ],
+  "additionalProperties": false
+}

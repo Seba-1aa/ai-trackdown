@@ -29,7 +29,7 @@ grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "updated: $(date -d yester
 grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "status: in-progress"
 
 # Quick status check for specific task
-head -20 tasks/issues/ISSUE-042-fix-auth-bug.md | grep -E "(status|title)"
+head -20 tasks/issues/ISS-0042-fix-auth-bug.md | grep -E "(status|title)"
 
 # Check if any tasks are blocked
 grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "status: blocked"

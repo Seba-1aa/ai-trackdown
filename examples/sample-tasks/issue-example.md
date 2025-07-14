@@ -1,23 +1,35 @@
 ---
-id: ISSUE-005
+issue_id: ISS-0005
 type: issue
 title: AI-powered product search and recommendations
 status: in-progress
-epic: EPIC-001
+epic_id: EP-0001
 assignee: @ai-engineer
-created: 2025-01-15T10:00:00Z
-updated: 2025-01-20T14:30:00Z
+created_date: 2025-01-15T10:00:00Z
+updated_date: 2025-01-20T14:30:00Z
 labels: [ai, search, recommendations, backend, high-priority]
 estimate: 13
-priority: high
+description: Implement AI-powered semantic search using OpenAI embeddings combined with a sophisticated recommendation engine that learns from user behavior and product relationships.
+estimated_tokens: 4000
+actual_tokens: 3456
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0020", "TSK-0021", "TSK-0022"]
+related_issues: ["ISS-0001", "ISS-0004", "ISS-0006", "ISS-0011"]
+completion_percentage: 65
+dependencies: ["ISS-0001", "ISS-0004"]
+blocked_by: []
+blocks: ["ISS-0006", "ISS-0011"]
 token_usage:
   total: 3456
+  remaining: 544
   by_agent:
     claude: 2890
     gpt4: 566
 sync:
-  github: 287
-  jira: CAT-145
+  github: "https://github.com/company/ecommerce/issues/287"
+  jira: "CAT-145"
+  linear: null
 ---
 
 # AI-powered Product Search and Recommendations

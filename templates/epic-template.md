@@ -1,25 +1,61 @@
 ---
-id: EPIC-000
+# Epic Template - AI-TRACKDOWN v4.3.0
+# High-level strategic initiative template
+
+# Project Association (Optional)
+# For multi-project environments, specify the parent project
+# For single-project environments, this can be omitted or left as null
+project_id: PRJ-0001  # Optional: Remove for single-project setups
+
+epic_id: EP-0000
 type: epic
-title: [Epic Title]
-status: planning
-owner: @teamlead
-created: YYYY-MM-DDTHH:mm:ssZ
-updated: YYYY-MM-DDTHH:mm:ssZ
-target_date: YYYY-MM-DDTHH:mm:ssZ
+title: "[Epic Title]"
+description: "High-level overview of what this epic accomplishes"
+state: planning
+status: planning                     # DEPRECATED: Use state field
+priority: high
+assignee: "@teamlead"
+created_date: "2025-07-09T10:00:00Z"
+updated_date: "2025-07-09T10:00:00Z"
+estimated_tokens: 1000
+actual_tokens: 0
+ai_context:
+  - "context/requirements"
+  - "context/constraints"
+  - "context/assumptions"
+  - "context/dependencies"
+sync_status: local
+
+# State metadata for automation and tracking
+state_metadata:
+  transitioned_at: "2025-07-09T10:00:00Z"
+  transitioned_by: "@teamlead"
+  previous_state: null
+  automation_eligible: true
+  assignee_on_transition: null
+  notifications_sent: []
 labels: []
+target_date: "2025-08-01T00:00:00Z"
 token_budget: 50000
 token_usage:
   total: 0
-  remaining: 50000
   by_agent: {}
 sync:
   github: null
   jira: null
   linear: null
+related_issues: []
+completion_percentage: 0
+dependencies: []
+blocked_by: []
+blocks: []
 ---
 
 # [Epic Title]
+
+> **Usage Mode**: This template supports both single-project and multi-project environments.
+> - **Single Project**: Remove or set `project_id: null` in the frontmatter
+> - **Multi-Project**: Specify the parent project ID (e.g., `PRJ-0001`)
 
 ## Executive Summary
 [High-level overview of what this epic accomplishes]

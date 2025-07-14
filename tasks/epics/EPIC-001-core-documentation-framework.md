@@ -1,18 +1,37 @@
 ---
-id: EPIC-001
+epic_id: EP-0001
 type: epic
 title: Core Documentation Framework
+description: Establish comprehensive documentation foundation for ai-trackdown open-source release, including all templates, examples, and getting-started materials.
 status: completed
-owner: @claude-pm-assistant
-created: 2025-01-07T14:00:00Z
-completed: 2025-01-07T15:30:00Z
+assignee: @claude-pm-assistant
+created_date: 2025-01-07T14:00:00Z
+updated_date: 2025-01-07T15:30:00Z
+completed_date: 2025-01-07T15:30:00Z
 target_date: 2025-01-07T18:00:00Z
+priority: high
+estimated_tokens: 15000
+actual_tokens: 12000
 token_budget: 15000
 token_usage:
   total: 12000
   remaining: 3000
   by_agent:
     claude: 12000
+related_issues: ["ISS-0001"]
+related_tasks: []
+completion_percentage: 100
+dependencies: []
+blocked_by: []
+blocks: []
+ai_context: |
+  This epic establishes the complete documentation foundation for the ai-trackdown open-source release.
+  It includes all necessary templates, examples, and getting-started materials to enable community adoption.
+  Focus on creating a compelling value proposition and comprehensive project demonstration.
+sync_status:
+  github: null
+  jira: null
+  linear: null
 ---
 
 # Core Documentation Framework

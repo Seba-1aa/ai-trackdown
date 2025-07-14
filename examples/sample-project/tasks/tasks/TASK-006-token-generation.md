@@ -1,17 +1,28 @@
 ---
-id: TASK-006
+task_id: TSK-0006
 type: task
 title: Implement secure token generation and storage for password reset
 status: in-progress
-issue: ISSUE-002
-epic: EPIC-001
+issue_id: ISS-0002
+epic_id: EP-0001
 assignee: @bob
-created: 2025-01-04T14:20:00Z
-updated: 2025-01-07T11:30:00Z
+created_date: 2025-01-04T14:20:00Z
+updated_date: 2025-01-07T11:30:00Z
 labels: [authentication, security, backend, tokens]
 estimate: 3
+description: Create a secure system for generating, storing, and validating password reset tokens using cryptographically secure random generation and Redis-based storage with automatic expiration.
+priority: high
+estimated_tokens: 1500
+actual_tokens: 1247
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: local
+completion_percentage: 60
+dependencies: []
+blocked_by: []
+blocks: ["TSK-0007"]
 token_usage:
   total: 1247
+  remaining: 253
   by_agent:
     claude: 892
     copilot: 355

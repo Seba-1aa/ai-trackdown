@@ -5,6 +5,10 @@ This directory contains comprehensive markdown templates for implementing ai-tra
 ## Overview
 
 ai-trackdown is a pure markdown-based methodology that provides:
+
+**IMPORTANT**: All templates and examples in this directory comply with the AI-Trackdown schema specification. See [SCHEMA.md](../SCHEMA.md) for complete field definitions and validation rules.
+
+### Key Features
 - **Text-First Approach**: All data stored as human-readable markdown files
 - **Git-Native Integration**: Leverages git's distributed nature and version control
 - **AI-Optimized Structure**: Designed for minimal token consumption and maximum context efficiency
@@ -14,9 +18,10 @@ ai-trackdown is a pure markdown-based methodology that provides:
 ## Template Files
 
 ### Core Templates
-- **`task-template.md`** - Template for granular implementation tasks
-- **`issue-template.md`** - Template for development issues and user stories
+- **`project-template.md`** - Template for complete project information and setup
 - **`epic-template.md`** - Template for high-level project initiatives
+- **`issue-template.md`** - Template for development issues and user stories
+- **`task-template.md`** - Template for granular implementation tasks
 - **`AI-TRACKDOWN-template.md`** - Project overview dashboard template
 
 ### Documentation Templates
@@ -37,6 +42,9 @@ cd my-project
 # Copy all templates to your project
 cp /path/to/ai-trackdown/templates/* templates/
 
+# Create project information file (new in v4.3.0)
+cp templates/project-template.md PRJ-0001-project-info.md
+
 # Create initial project dashboard
 cp templates/AI-TRACKDOWN-template.md AI-TRACKDOWN.md
 ```
@@ -44,10 +52,10 @@ cp templates/AI-TRACKDOWN-template.md AI-TRACKDOWN.md
 ### 3. Create Your First Epic
 ```bash
 # Copy and customize epic template
-cp templates/epic-template.md tasks/epics/EPIC-001-user-authentication.md
+cp templates/epic-template.md tasks/epics/EP-0001-user-authentication.md
 
 # Edit the file to add your specific requirements
-vim tasks/epics/EPIC-001-user-authentication.md
+vim tasks/epics/EP-0001-user-authentication.md
 ```
 
 ### 4. Create Initial Configuration
@@ -71,33 +79,45 @@ cp templates/llms-txt-examples.md .ai-trackdown/llms.txt
 ## File Naming Conventions
 
 ### Task Hierarchy
-- **Epics**: `EPIC-XXX-descriptive-name.md` (major features, 1-6 months)
-- **Issues**: `ISSUE-XXX-descriptive-name.md` (user stories, 1-2 sprints)
-- **Tasks**: `TASK-XXX-descriptive-name.md` (implementation work, hours-days)
+- **Projects**: `PRJ-XXXX-descriptive-name.md` (complete project information)
+- **Epics**: `EP-XXXX-descriptive-name.md` (major features, 1-6 months)
+- **Issues**: `ISS-XXXX-descriptive-name.md` (user stories, 1-2 sprints)
+- **Tasks**: `TSK-XXXX-descriptive-name.md` (implementation work, hours-days)
 
 ### ID Format
-- Use zero-padded numbers: `EPIC-001`, `ISSUE-042`, `TASK-123`
+- Use zero-padded numbers: `PRJ-0001`, `EP-0001`, `ISS-0042`, `TSK-0123`
 - Descriptive names in kebab-case: `user-authentication-system`
 - Include key domain concepts: `payment-integration`, `api-redesign`
 
 ## Template Structure
 
 ### Frontmatter (YAML)
-All templates use YAML frontmatter for metadata:
+All templates use YAML frontmatter for metadata following the schema defined in [SCHEMA.md](../SCHEMA.md):
 ```yaml
 ---
-id: TASK-001
+# Optional project association (new in v4.3.0)
+project_id: PRJ-0001  # Omit for single-project setups
+
+task_id: TSK-0001
 type: task
+issue_id: ISS-0001
+epic_id: EP-0001
 title: Task Title
-status: open
-assignee: @username
-created: 2025-07-07T10:00:00Z
-updated: 2025-07-07T10:00:00Z
+description: "Clear task description"
+status: planning
+priority: medium
+assignee: username
+created_date: 2025-07-07T10:00:00Z
+updated_date: 2025-07-07T10:00:00Z
+estimated_tokens: 100
+actual_tokens: 0
+ai_context:
+  - context/requirements
+  - context/constraints
+sync_status: local
 labels: [frontend, authentication]
-estimate: 3
-token_usage:
-  total: 0
-  by_agent: {}
+blocked_by: []
+blocks: []
 ---
 ```
 
@@ -191,10 +211,35 @@ Templates include sync metadata for:
 ## Advanced Features
 
 ### Multi-Project Support
+All templates now support both single-project and multi-project environments through the optional `project_id` field:
+
+**Single Project Mode**:
+```yaml
+# Remove or set to null in template frontmatter
+project_id: null  # Or omit entirely
+```
+
+**Multi-Project Mode**:
+```yaml
+# Specify parent project ID
+project_id: PRJ-0001
+```
+
+**Workspace Structure**:
 ```
 workspace/
 ├── project-a/           # Full ai-trackdown structure
+│   ├── tasks/
+│   │   ├── epics/      # project_id: PRJ-0001
+│   │   ├── issues/     # project_id: PRJ-0001  
+│   │   └── tasks/      # project_id: PRJ-0001
+│   └── PRJ-0001-project-info.md
 ├── project-b/           # Full ai-trackdown structure
+│   ├── tasks/
+│   │   ├── epics/      # project_id: PRJ-0002
+│   │   ├── issues/     # project_id: PRJ-0002
+│   │   └── tasks/      # project_id: PRJ-0002
+│   └── PRJ-0002-project-info.md
 └── shared/
     ├── templates/       # Shared templates
     └── common-docs/     # Cross-project documentation
@@ -218,9 +263,9 @@ workspace/
 ```
 tasks/
 ├── epics/
-│   ├── EPIC-001-user-onboarding.md
-│   ├── EPIC-002-core-features.md
-│   └── EPIC-003-launch-preparation.md
+│   ├── EP-0001-user-onboarding.md
+│   ├── EP-0002-core-features.md
+│   └── EP-0003-launch-preparation.md
 ├── issues/
 │   ├── ISSUE-001-user-registration.md
 │   ├── ISSUE-002-feature-a-implementation.md
@@ -235,9 +280,9 @@ tasks/
 ```
 tasks/
 ├── epics/
-│   ├── EPIC-001-legacy-system-integration.md
-│   ├── EPIC-002-security-compliance.md
-│   └── EPIC-003-performance-optimization.md
+│   ├── EP-0001-legacy-system-integration.md
+│   ├── EP-0002-security-compliance.md
+│   └── EP-0003-performance-optimization.md
 ├── frontend/
 │   ├── issues/
 │   └── tasks/
@@ -253,9 +298,9 @@ tasks/
 ```
 tasks/
 ├── epics/
-│   ├── EPIC-001-core-api-design.md
-│   ├── EPIC-002-documentation-system.md
-│   └── EPIC-003-community-tools.md
+│   ├── EP-0001-core-api-design.md
+│   ├── EP-0002-documentation-system.md
+│   └── EP-0003-community-tools.md
 ├── issues/
 │   ├── ISSUE-001-api-interface.md
 │   ├── ISSUE-002-getting-started-guide.md
@@ -275,9 +320,9 @@ tasks/
 4. **llms.txt Examples**: `templates/llms-txt-examples.md` - AI integration patterns
 
 ### Common Patterns
-- **Task Dependencies**: Use "Blocks" and "Blocked by" for task ordering
+- **Task Dependencies**: Use "blocks" and "blocked_by" fields for task ordering
 - **Epic Progress**: Track completion percentage in epic files
-- **Status Transitions**: `open → in-progress → review → done`
+- **Status Transitions**: `planning → active → blocked → done`
 - **Token Budgets**: Set epic-level budgets and track usage
 
 ### Troubleshooting

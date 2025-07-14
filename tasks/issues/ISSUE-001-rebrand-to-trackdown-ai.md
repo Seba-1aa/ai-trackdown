@@ -1,20 +1,35 @@
 ---
-id: ISSUE-001
+issue_id: ISS-0002
 type: issue
 title: Rebrand project from TaskTrack to AI Track Down
+description: Complete rebranding of the project from "TaskTrack" to "AI Track Down" across all documentation, templates, examples, and configuration files.
 status: completed
-epic: EPIC-002
+epic_id: EP-0002
 assignee: @claude-pm-assistant
-created: 2025-01-07T15:45:00Z
-updated: 2025-01-07T15:45:00Z
+created_date: 2025-01-07T15:45:00Z
+updated_date: 2025-01-07T15:45:00Z
+completed_date: 2025-01-07T15:45:00Z
+priority: high
 labels: [branding, documentation, high-priority]
-estimate: 3
+estimated_tokens: 3000
+actual_tokens: 0
 token_usage:
   total: 0
   by_agent: {}
-sync:
+related_issues: []
+related_tasks: []
+completion_percentage: 100
+dependencies: []
+blocked_by: []
+blocks: []
+ai_context: |
+  This is a comprehensive rebranding task affecting all project documentation.
+  The new name "AI Track Down" better positions the project as an AI-native task management framework.
+  Focus on maintaining consistency and ensuring all references are updated systematically.
+sync_status:
   github: null
   jira: null
+  linear: null
 ---
 
 # Rebrand project from TaskTrack to AI Track Down
@@ -46,13 +61,6 @@ Files requiring updates:
 - Configuration files in /.ai-trackdown/
 - Project dashboard (AI-TRACKDOWN.md)
 - Project index (llms.txt)
-
-## Token Context
-<!-- AI_CONTEXT_START -->
-This is a comprehensive rebranding task affecting all project documentation.
-The new name "AI Track Down" better positions the project as an AI-native task management framework.
-Focus on maintaining consistency and ensuring all references are updated systematically.
-<!-- AI_CONTEXT_END -->
 
 ## Activity Log
 - 2025-01-07T15:45:00Z: Created by @claude-pm-assistant

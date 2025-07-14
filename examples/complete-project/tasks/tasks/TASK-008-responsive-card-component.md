@@ -1,24 +1,36 @@
 ---
-id: TASK-008
+task_id: TSK-0008
 type: task
 title: Responsive Card Component Implementation
 status: in-progress
-issue: ISSUE-008
+issue_id: ISS-0008
 assignee: @frontend-dev
-created: 2025-01-04T10:30:00Z
-updated: 2025-01-07T16:20:00Z
+created_date: 2025-01-04T10:30:00Z
+updated_date: 2025-01-07T16:20:00Z
 labels: [frontend, component, responsive, design-system]
 estimate: 5
+description: Implement a flexible, responsive Card component as part of the ShopFlow design system. The component should work seamlessly across mobile, tablet, and desktop breakpoints while supporting various content types including product cards, user profile cards, and informational cards.
+epic_id: EP-0002
+priority: medium
+estimated_tokens: 1200
+actual_tokens: 1089
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+completion_percentage: 70
+dependencies: ["ISS-0007"]
+blocked_by: []
+blocks: []
 effort_spent: 3.5
 token_usage:
   total: 1089
+  remaining: 111
   by_agent:
     claude: 734
     copilot: 355
 sync:
-  github: 523
-  jira: PLATFORM-189
-progress: 70
+  github: "https://github.com/shopflow/ui/issues/523"
+  jira: "PLATFORM-189"
+  linear: null
 ---
 
 # Responsive Card Component Implementation

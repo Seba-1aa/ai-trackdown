@@ -1,23 +1,35 @@
 ---
-id: ISSUE-002
+issue_id: ISS-0002
 type: issue
 title: Implement secure password reset and recovery system
 status: in-progress
-epic: EPIC-001
+epic_id: EP-0001
 assignee: @bob
-created: 2025-01-03T10:15:00Z
-updated: 2025-01-07T16:45:00Z
+created_date: 2025-01-03T10:15:00Z
+updated_date: 2025-01-07T16:45:00Z
 labels: [authentication, security, password-reset, priority-high]
 estimate: 5
+description: Create a secure password reset flow that allows users to recover their accounts via email verification while maintaining high security standards and preventing abuse.
+priority: high
+estimated_tokens: 8000
+actual_tokens: 3127
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0005", "TSK-0006", "TSK-0007", "TSK-0008", "TSK-0009", "TSK-0010", "TSK-0011"]
+related_issues: ["ISS-0001", "ISS-0005"]
+completion_percentage: 40
+dependencies: ["TSK-0003"]
+blocked_by: ["TSK-0003"]
+blocks: ["TSK-0012"]
 token_usage:
   total: 3127
+  remaining: 4873
   by_agent:
     claude: 2234
     copilot: 893
     gpt4: 0
-  budget: 8000
 sync:
-  github: 15
+  github: "https://github.com/company/project/issues/15"
   jira: null
   linear: null
 ---

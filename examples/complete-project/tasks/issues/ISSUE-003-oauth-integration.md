@@ -1,25 +1,38 @@
 ---
-id: ISSUE-003
+issue_id: ISS-0003
 type: issue
 title: OAuth 2.0 Provider Integration
 status: in-progress
-epic: EPIC-001
+epic_id: EP-0001
 assignee: @alex-dev
-created: 2025-01-02T10:00:00Z
-updated: 2025-01-07T15:20:00Z
+created_date: 2025-01-02T10:00:00Z
+updated_date: 2025-01-07T15:20:00Z
 labels: [authentication, oauth, integration, external-providers]
 estimate: 13
+description: Implement OAuth 2.0 integration with major identity providers (Google, GitHub, Microsoft) to enable social login functionality. This includes PKCE flow implementation, secure token handling, and seamless user account linking/creation.
+priority: high
+estimated_tokens: 5000
+actual_tokens: 4234
+ai_context: ["context/requirements", "context/constraints", "context/dependencies"]
+sync_status: synced
+related_tasks: ["TSK-0004", "TSK-0005", "TSK-0006"]
+related_issues: ["ISS-0001", "ISS-0004"]
+completion_percentage: 70
+dependencies: ["ISS-0001"]
+blocked_by: []
+blocks: ["ISS-0004"]
 effort_spent: 8.5
 token_usage:
   total: 4234
+  remaining: 766
   by_agent:
     claude: 2892
     gpt4: 1189
     copilot: 153
 sync:
-  github: 267
-  jira: PLATFORM-145
-  linear: issue_abc234
+  github: "https://github.com/shopflow/api/issues/267"
+  jira: "PLATFORM-145"
+  linear: "issue_abc234"
 ---
 
 # OAuth 2.0 Provider Integration
