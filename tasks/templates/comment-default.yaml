@@ -1,0 +1,30 @@
+---
+comment_id: {PARENT_ID}-CMT-XXX      # Parent ID + sequential number
+parent_type: issue                   # Parent type (epic|issue|task)
+parent_id: {PARENT_ID}               # Parent ticket identifier
+author: username                     # Comment author
+created_date: 2025-07-17T00:00:00Z  # Creation timestamp
+updated_date: 2025-07-17T00:00:00Z  # Last modification
+content: "Comment content..."        # Comment text
+edited: false                        # Whether comment was edited
+edit_history: []                     # Previous versions if edited
+reactions: {}                        # Emoji reactions (optional)
+attachments: []                      # File attachments (optional)
+mentions: []                         # Mentioned users
+visibility: public                   # Visibility (public|internal|private)
+sync_status: local                   # External sync state
+ai_context: []                       # AI context if relevant
+---
+
+# Comment on {PARENT_ID}: {Title}
+
+{Comment content goes here...}
+
+## Additional Context
+
+{Any additional context, code examples, or detailed explanations}
+
+## References
+
+- {Links to related issues, PRs, or documentation}
+- {External references if applicable}

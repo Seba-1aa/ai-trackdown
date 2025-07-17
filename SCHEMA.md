@@ -148,6 +148,8 @@ state_metadata:
 related_issues: []                   # Linked issues
 dependencies: []                     # Epic dependencies
 completion_percentage: 0             # Progress indicator
+comment_count: 0                     # Number of comments
+latest_comment_date: null            # Timestamp of most recent comment
 ```
 
 **Content Structure**:
@@ -199,6 +201,8 @@ related_issues: []                   # Peer issues
 completion_percentage: 0             # Progress indicator
 blocked_by: []                       # Blocking dependencies
 blocks: []                           # Dependent items
+comment_count: 0                     # Number of comments
+latest_comment_date: null            # Timestamp of most recent comment
 ```
 
 **Content Structure**:
@@ -244,6 +248,8 @@ state_metadata:
 subtasks: []                         # Sub-task breakdown
 blocked_by: []                       # Blocking dependencies
 blocks: []                           # Dependent items
+comment_count: 0                     # Number of comments
+latest_comment_date: null            # Timestamp of most recent comment
 ```
 
 **Content Structure**:
@@ -251,6 +257,36 @@ blocks: []                           # Dependent items
 - Implementation steps (numbered sequence)
 - Acceptance criteria with verification points
 - Technical notes and implementation details
+
+### Comment ({PARENT_ID}-CMT-XXX)
+
+**Purpose**: Discussion and collaboration on epics, issues, and tasks.
+
+**Schema Structure**:
+```yaml
+comment_id: ISS-0001-CMT-001         # Parent ID + comment number
+parent_type: issue                   # Parent type (epic|issue|task)
+parent_id: ISS-0001                  # Parent ticket identifier
+author: masa                         # Comment author
+created_date: 2025-07-09T10:00:00Z  # Creation timestamp
+updated_date: 2025-07-09T10:00:00Z  # Last modification
+content: "Comment text..."           # Comment content
+edited: false                        # Whether comment was edited
+edit_history: []                     # Previous versions if edited
+reactions: {}                        # Emoji reactions (optional)
+attachments: []                      # File attachments (optional)
+mentions: []                         # Mentioned users
+visibility: public                   # Visibility (public|internal|private)
+sync_status: local                   # External sync state
+ai_context: []                       # AI context if relevant
+```
+
+**Content Structure**:
+- Plain text or markdown formatted content
+- Support for code blocks and formatting
+- @mentions for user notifications
+- Optional file attachments
+- Edit history tracking
 
 ### Pull Request (PR-XXXX)
 
@@ -328,6 +364,8 @@ review_status: pending               # DEPRECATED: Use state field
 | `dependencies` | Array | Dependency identifiers |
 | `blocked_by` | Array | Blocking item identifiers |
 | `blocks` | Array | Dependent item identifiers |
+| `comment_count` | Number | Number of comments on the ticket |
+| `latest_comment_date` | ISO Date | Timestamp of most recent comment |
 
 ### State Metadata Fields
 
@@ -373,6 +411,22 @@ review_status: pending               # DEPRECATED: Use state field
 | `branch_name` | String | Git branch reference |
 | `files_changed` | Array | Modified file list |
 | `review_status` | String | Code review state |
+
+### Comment Specific Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `comment_id` | String | Unique comment identifier ({PARENT_ID}-CMT-XXX) |
+| `parent_type` | String | Type of parent ticket (epic/issue/task) |
+| `parent_id` | String | Parent ticket identifier |
+| `author` | String | Comment author username |
+| `content` | String | Comment text content |
+| `edited` | Boolean | Whether comment has been edited |
+| `edit_history` | Array | Previous versions of the comment |
+| `reactions` | Object | Emoji reactions to comment |
+| `attachments` | Array | File attachments |
+| `mentions` | Array | Mentioned user identifiers |
+| `visibility` | String | Comment visibility level |
 
 ## Data Types and Constraints
 
@@ -537,10 +591,27 @@ tasks/
 │   ├── PR-0001-pr-name.md
 │   ├── PR-0002-pr-name.md
 │   └── ...
+├── comments/                 # Comment files organized by parent
+│   ├── epics/
+│   │   ├── EP-0001/
+│   │   │   ├── EP-0001-CMT-001-initial-comment.md
+│   │   │   └── EP-0001-CMT-002-followup.md
+│   │   └── EP-0002/
+│   │       └── EP-0002-CMT-001-comment.md
+│   ├── issues/
+│   │   ├── ISS-0001/
+│   │   │   ├── ISS-0001-CMT-001-comment.md
+│   │   │   └── ISS-0001-CMT-002-comment.md
+│   │   └── ISS-0002/
+│   │       └── ISS-0002-CMT-001-comment.md
+│   └── tasks/
+│       └── TSK-0001/
+│           └── TSK-0001-CMT-001-comment.md
 └── templates/               # Template files
     ├── epic-default.yaml
     ├── issue-default.yaml
-    └── task-default.yaml
+    ├── task-default.yaml
+    └── comment-default.yaml
 ```
 
 ### Multi-Project Directory Organization
@@ -567,11 +638,22 @@ projects/
 │   ├── PR-0001-pr-name.md
 │   ├── PR-0002-pr-name.md
 │   └── ...
+├── comments/                 # Comment files organized by parent
+│   ├── epics/
+│   │   └── EP-0001/
+│   │       └── EP-0001-CMT-001-comment.md
+│   ├── issues/
+│   │   └── ISS-0001/
+│   │       └── ISS-0001-CMT-001-comment.md
+│   └── tasks/
+│       └── TSK-0001/
+│           └── TSK-0001-CMT-001-comment.md
 └── templates/               # Template files
     ├── project-default.yaml
     ├── epic-default.yaml
     ├── issue-default.yaml
-    └── task-default.yaml
+    ├── task-default.yaml
+    └── comment-default.yaml
 ```
 
 ### Naming Convention
@@ -581,19 +663,32 @@ projects/
 - Zero-padded numbers: `0001`, `0002`, etc.
 - Kebab-case titles: lowercase with hyphens
 
+**Comment Files**: `{PARENT_ID}-CMT-{NUMBER}-{kebab-case-title}.md`
+- Parent ID included in filename for faster lookups
+- Comment numbers are sequential per parent (001, 002, etc.)
+
 **Examples**:
 - `PRJ-0001-ai-trackdown-system.md`
 - `EP-0001-user-authentication-system.md`
 - `ISS-0042-implement-login-form.md`
 - `TSK-0123-create-database-schema.md`
 - `PR-0001-add-user-validation.md`
+- `ISS-0001-CMT-001-initial-discussion.md`
+- `EP-0001-CMT-002-architecture-feedback.md`
 
-**Identifiers**: `{TYPE}-{ZERO_PADDED_NUMBER}`
+**Identifiers**: 
 - Project: `PRJ-0001`
 - Epic: `EP-0001`
 - Issue: `ISS-0001`
 - Task: `TSK-0001`
 - Pull Request: `PR-0001`
+- Comment: `{PARENT_ID}-CMT-{NUMBER}` (e.g., `ISS-0001-CMT-001`)
+
+**Comment Organization**:
+Comments are stored in subdirectories based on their parent type and ID:
+- Epic comments: `comments/epics/{EP-XXXX}/{EP-XXXX}-CMT-XXX-title.md`
+- Issue comments: `comments/issues/{ISS-XXXX}/{ISS-XXXX}-CMT-XXX-title.md`
+- Task comments: `comments/tasks/{TSK-XXXX}/{TSK-XXXX}-CMT-XXX-title.md`
 
 ## Data Format
 
@@ -916,7 +1011,7 @@ function validateStateTransition(currentState: string, newState: string): boolea
 
 ---
 
-**Schema Version**: 4.4.0  
-**Last Updated**: 2025-07-14  
-**Status**: Enhanced with Unified State-Resolution Model  
+**Schema Version**: 4.5.0  
+**Last Updated**: 2025-07-17  
+**Status**: Enhanced with Comment Support  
 **Migration Status**: Phase 1 Complete - Schema Design
