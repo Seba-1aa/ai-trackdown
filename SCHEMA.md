@@ -574,7 +574,7 @@ status_migration_map:
 ### Single-Project Directory Organization
 
 ```
-tasks/
+tickets/
 ├── epics/                    # Epic files
 │   ├── EP-0001-epic-name.md
 │   ├── EP-0002-epic-name.md
@@ -1011,7 +1011,7 @@ function validateStateTransition(currentState: string, newState: string): boolea
 
 ---
 
-**Schema Version**: 4.5.0  
-**Last Updated**: 2025-07-17  
-**Status**: Enhanced with Comment Support  
+**Schema Version**: 4.5.1  
+**Last Updated**: 2025-07-25  
+**Status**: Enhanced with Comment Support, Updated to use tickets/ directory  
 **Migration Status**: Phase 1 Complete - Schema Design

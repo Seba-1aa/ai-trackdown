@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Future changes will be listed here
 
+## [1.0.1] - 2025-07-25
+
+### Changed
+- **BREAKING CHANGE**: Updated default directory structure from `tasks/` to `tickets/`
+  - All documentation and templates updated to reflect new structure
+  - Schema version bumped to 4.5.1
+  - This aligns with common project management terminology
+  - Projects using `tasks/` directory can continue to work by configuring their tools appropriately
+
 ## [0.2.0] - 2025-07-08
 
 ### Added

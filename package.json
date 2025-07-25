@@ -1,6 +1,6 @@
 {
   "name": "aitasktrack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight AI-native task management system with git integration and llms.txt support",
   "main": "src/index.js",
   "bin": {

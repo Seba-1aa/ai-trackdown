@@ -73,10 +73,10 @@ Brief description of what this PR accomplishes and why it's needed.
 ## 🔗 Related Items
 
 ### Linked Issues
-- [ ] ISSUE-XXX: [Issue Title](../tasks/issues/ISSUE-XXX-filename.md)
+- [ ] ISSUE-XXX: [Issue Title](../tickets/issues/ISSUE-XXX-filename.md)
 
 ### Linked Tasks  
-- [ ] TASK-XXX: [Task Title](../tasks/tasks/TASK-XXX-filename.md)
+- [ ] TASK-XXX: [Task Title](../tickets/tasks/TASK-XXX-filename.md)
 
 ## 🎯 Type of Change
 

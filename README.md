@@ -167,7 +167,7 @@ cp templates/project-template.md projects/PRJ-0001-my-project.md
 **Single-Project Mode**:
 ```bash
 # Use the epic template
-cp templates/epic-template.md tasks/epics/EP-0001-user-authentication.md
+cp templates/epic-template.md tickets/epics/EP-0001-user-authentication.md
 # Edit with your epic details
 ```
 
